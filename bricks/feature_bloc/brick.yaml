@@ -1,0 +1,11 @@
+name: feature_bloc
+description: A feature folder with a Bloc (events/states), a view page, and a barrel file, matching this app's feature layout.
+version: 0.1.0+1
+environment:
+  mason: ">=0.1.0 <0.2.0"
+
+vars:
+  name:
+    type: string
+    description: The feature name (e.g. "applications", "review", "admin_users")
+    prompt: What is the feature name?

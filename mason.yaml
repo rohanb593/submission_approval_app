@@ -1,0 +1,10 @@
+# Register bricks which can be consumed via the Mason CLI.
+# Run "mason get" to install all registered bricks.
+# To learn more, visit https://docs.brickhub.dev.
+bricks:
+  # Scaffolds a lib/<name>/ feature folder: a Bloc (events/states), a view
+  # page wired to a BlocProvider, and a barrel file. Used to generate each
+  # of this app's features (auth, applications, review, admin_users,
+  # activity, notifications) with a consistent shape.
+  feature_bloc:
+    path: bricks/feature_bloc

@@ -31,7 +31,40 @@ $ flutter run --flavor staging --target lib/main_staging.dart
 $ flutter run --flavor production --target lib/main_production.dart
 ```
 
+By default every flavor points at `http://localhost:8080`, which reaches a
+backend started with `docker compose up -d` (see the sibling
+`Submission & Approval Workflow` repo) from the iOS simulator, macOS, or
+Chrome. It will **not** reach that backend from the Android emulator (use
+`10.0.2.2` instead) or a physical device (use your Mac's LAN IP) — override
+with:
+
+```sh
+$ flutter run --flavor development --target lib/main_development.dart \
+    --dart-define=API_BASE_URL=http://10.0.2.2:8080
+```
+
+Seed test accounts (`password123` for all) with `go run ./cmd/seed` in the
+backend repo: `requester@example.com`, `reviewer@example.com`,
+`admin@example.com`.
+
 _\*Submission Approval App works on iOS, Android, Web, and Windows._
+
+---
+
+## Mason Bricks 🧱
+
+The `feature_bloc` brick (`bricks/feature_bloc`, registered in `mason.yaml`)
+scaffolds a `lib/<name>/` feature folder — a Cubit-ready Bloc, a view page
+wired to `BlocProvider`, and a barrel file — matching this app's layout. It
+was used to generate the initial `auth`, `applications`, `admin_users`,
+`activity`, and `notifications` folders (whose Blocs were then hand-adapted;
+most ended up as Cubits instead, following this app's convention of Cubit
+for straightforward state and Bloc for event-driven flows).
+
+```sh
+$ mason get
+$ mason make feature_bloc --name my_feature -o .
+```
 
 ---
 
