@@ -41,20 +41,20 @@ class ApplicationDetailCubit extends Cubit<ApplicationDetailState> {
     }
   }
 
-  Future<bool> submit() => _act(() => _repo.submit(_id));
+  Future<void> submit() => _act(() => _repo.submit(_id));
 
-  Future<bool> startReview() => _act(() => _repo.startReview(_id));
+  Future<void> startReview() => _act(() => _repo.startReview(_id));
 
-  Future<bool> approve({String comment = ''}) =>
+  Future<void> approve({String comment = ''}) =>
       _act(() => _repo.approve(_id, comment: comment));
 
-  Future<bool> reject({required String comment}) =>
+  Future<void> reject({required String comment}) =>
       _act(() => _repo.reject(_id, comment: comment));
 
-  Future<bool> returnForChanges({required String comment}) =>
+  Future<void> returnForChanges({required String comment}) =>
       _act(() => _repo.returnForChanges(_id, comment: comment));
 
-  Future<bool> _act(Future<Application> Function() action) async {
+  Future<void> _act(Future<Application> Function() action) async {
     final current = state.detail;
     emit(
       ApplicationDetailState(
@@ -66,7 +66,6 @@ class ApplicationDetailCubit extends Cubit<ApplicationDetailState> {
     try {
       await action();
       await load();
-      return true;
     } on ApiException catch (e) {
       emit(
         ApplicationDetailState(
@@ -75,7 +74,6 @@ class ApplicationDetailCubit extends Cubit<ApplicationDetailState> {
           actionError: e.message,
         ),
       );
-      return false;
     }
   }
 }

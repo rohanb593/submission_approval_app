@@ -31,6 +31,7 @@ class AdminUsersCubit extends Cubit<AdminUsersState> {
     }
   }
 
+  // ignore: prefer_void_public_cubit_methods
   Future<String?> create({
     required String email,
     required String password,
@@ -45,6 +46,7 @@ class AdminUsersCubit extends Cubit<AdminUsersState> {
     }
   }
 
+  // ignore: prefer_void_public_cubit_methods
   Future<String?> updateRole(String id, AppRole role) async {
     try {
       await _repo.updateRole(id, role);
@@ -55,6 +57,7 @@ class AdminUsersCubit extends Cubit<AdminUsersState> {
     }
   }
 
+  // ignore: prefer_void_public_cubit_methods
   Future<String?> delete(String id) async {
     try {
       await _repo.delete(id);

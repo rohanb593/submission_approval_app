@@ -8,18 +8,19 @@ import 'package:submission_approval_app/api/repositories/application_repository.
 part 'application_form_state.dart';
 
 /// Backs both the "new application" and "edit draft" forms: `POST
-/// /applications` when [editingId] is null, `PUT /applications/{id}`
+/// /applications` when editingId is null, `PUT /applications/{id}`
 /// otherwise. Only a DRAFT application's owner may edit it — the backend
 /// enforces that; a validation/forbidden error surfaces the same way here.
 class ApplicationFormCubit extends Cubit<ApplicationFormState> {
   ApplicationFormCubit({
     required ApplicationRepository applicationRepository,
-    this.editingId,
+    String? editingId,
   }) : _repo = applicationRepository,
+       _editingId = editingId,
        super(const ApplicationFormState());
 
   final ApplicationRepository _repo;
-  final String? editingId;
+  final String? _editingId;
 
   Future<void> submit({
     required String title,
@@ -29,7 +30,7 @@ class ApplicationFormCubit extends Cubit<ApplicationFormState> {
   }) async {
     emit(const ApplicationFormState(status: ApplicationFormStatus.submitting));
     try {
-      final id = editingId;
+      final id = _editingId;
       final app = id == null
           ? await _repo.create(
               title: title,
