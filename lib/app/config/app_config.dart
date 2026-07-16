@@ -9,7 +9,7 @@ class AppConfig {
   /// `docker-compose up` backend running on your Mac from: the iOS
   /// simulator, macOS, or Chrome/web. It will NOT work from the Android
   /// emulator (use `10.0.2.2` instead) or a physical device (use your
-  /// Mac's LAN IP, e.g. `192.168.x.x`) — override via `--dart-define=API_BASE_URL=...`
-  /// when running those targets.
+  /// Mac's LAN IP, e.g. `192.168.x.x`) — override via
+  /// `--dart-define=API_BASE_URL=...` when running those targets.
   final String apiBaseUrl;
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -10,9 +12,15 @@ class ActivityPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ActivityCubit(
-        activityRepository: context.read<AppDependencies>().activityRepository,
-      )..load(),
+      create: (context) {
+        final cubit = ActivityCubit(
+          activityRepository: context
+              .read<AppDependencies>()
+              .activityRepository,
+        );
+        unawaited(cubit.load());
+        return cubit;
+      },
       child: const _ActivityView(),
     );
   }

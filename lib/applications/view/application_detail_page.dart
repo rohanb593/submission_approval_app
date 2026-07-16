@@ -29,12 +29,16 @@ class ApplicationDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ApplicationDetailCubit(
-        applicationRepository: context
-            .read<AppDependencies>()
-            .applicationRepository,
-        applicationId: applicationId,
-      )..load(),
+      create: (context) {
+        final cubit = ApplicationDetailCubit(
+          applicationRepository: context
+              .read<AppDependencies>()
+              .applicationRepository,
+          applicationId: applicationId,
+        );
+        unawaited(cubit.load());
+        return cubit;
+      },
       child: const _ApplicationDetailView(),
     );
   }
@@ -226,7 +230,7 @@ class _ActionRow extends StatelessWidget {
                           ApplicationFormPage.route(existing: application),
                         )
                         .then((changed) {
-                          if (changed == true) cubit.load();
+                          if (changed == true) unawaited(cubit.load());
                         }),
                   ),
             icon: const Icon(Icons.edit),

@@ -16,11 +16,15 @@ class ApplicationsListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ApplicationsListCubit(
-        applicationRepository: context
-            .read<AppDependencies>()
-            .applicationRepository,
-      )..load(),
+      create: (context) {
+        final cubit = ApplicationsListCubit(
+          applicationRepository: context
+              .read<AppDependencies>()
+              .applicationRepository,
+        );
+        unawaited(cubit.load());
+        return cubit;
+      },
       child: const ApplicationsListView(),
     );
   }

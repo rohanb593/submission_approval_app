@@ -51,11 +51,15 @@ class _HomeShellState extends State<HomeShell> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => NotificationsCubit(
-        notificationRepository: context
-            .read<AppDependencies>()
-            .notificationRepository,
-      )..load(),
+      create: (context) {
+        final cubit = NotificationsCubit(
+          notificationRepository: context
+              .read<AppDependencies>()
+              .notificationRepository,
+        );
+        unawaited(cubit.load());
+        return cubit;
+      },
       child: Scaffold(
         appBar: AppBar(
           title: Text(_destinations[_index].title),

@@ -10,8 +10,8 @@ class NotificationsBell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final unreadCount = context.select(
-      (NotificationsCubit cubit) => cubit.state.unreadCount,
+    final unreadCount = context.select<NotificationsCubit, int>(
+      (cubit) => cubit.state.unreadCount,
     );
     return IconButton(
       tooltip: 'Notifications',

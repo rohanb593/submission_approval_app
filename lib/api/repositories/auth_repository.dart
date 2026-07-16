@@ -3,8 +3,9 @@ import 'package:submission_approval_app/api/models/app_user.dart';
 import 'package:submission_approval_app/api/token_storage.dart';
 
 /// Result of `POST /auth/login`: either a completed session (2FA disabled)
-/// or a pending challenge that must be confirmed via [AuthRepository.verifyLogin]
-/// (2FA enabled). See `loginResponse` in `backend/internal/httpapi/auth_handlers.go`.
+/// or a pending challenge that must be confirmed via
+/// [AuthRepository.verifyLogin] (2FA enabled). See `loginResponse` in
+/// `backend/internal/httpapi/auth_handlers.go`.
 sealed class LoginResult {
   const LoginResult();
 }

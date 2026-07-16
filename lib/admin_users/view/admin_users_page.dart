@@ -12,9 +12,13 @@ class AdminUsersPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AdminUsersCubit(
-        userRepository: context.read<AppDependencies>().userRepository,
-      )..load(),
+      create: (context) {
+        final cubit = AdminUsersCubit(
+          userRepository: context.read<AppDependencies>().userRepository,
+        );
+        unawaited(cubit.load());
+        return cubit;
+      },
       child: const _AdminUsersView(),
     );
   }
@@ -167,7 +171,8 @@ class _AdminUsersView extends StatelessWidget {
                                   builder: (context) => AlertDialog(
                                     title: const Text('Delete user?'),
                                     content: Text(
-                                      'Remove ${user.email}? This cannot be undone.',
+                                      'Remove ${user.email}? '
+                                      'This cannot be undone.',
                                     ),
                                     actions: [
                                       TextButton(

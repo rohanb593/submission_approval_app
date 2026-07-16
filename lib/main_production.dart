@@ -6,7 +6,8 @@ Future<void> main() async {
   const config = AppConfig(
     apiBaseUrl: String.fromEnvironment(
       'API_BASE_URL',
-      defaultValue: 'https://submission-approval-workflow-production.up.railway.app',
+      defaultValue:
+          'https://submission-approval-workflow-production.up.railway.app',
     ),
   );
   await bootstrap(() => const App(config: config));
