@@ -31,6 +31,7 @@ class AdminUsersCubit extends Cubit<AdminUsersState> {
     }
   }
 
+  // Returns an inline error message for form-level handling in the UI.
   // ignore: prefer_void_public_cubit_methods
   Future<String?> create({
     required String email,
@@ -46,6 +47,7 @@ class AdminUsersCubit extends Cubit<AdminUsersState> {
     }
   }
 
+  // Returns an inline error message for form-level handling in the UI.
   // ignore: prefer_void_public_cubit_methods
   Future<String?> updateRole(String id, AppRole role) async {
     try {
@@ -57,6 +59,7 @@ class AdminUsersCubit extends Cubit<AdminUsersState> {
     }
   }
 
+  // Returns an inline error message for form-level handling in the UI.
   // ignore: prefer_void_public_cubit_methods
   Future<String?> delete(String id) async {
     try {

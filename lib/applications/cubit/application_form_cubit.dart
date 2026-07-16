@@ -14,9 +14,8 @@ part 'application_form_state.dart';
 class ApplicationFormCubit extends Cubit<ApplicationFormState> {
   ApplicationFormCubit({
     required ApplicationRepository applicationRepository,
-    String? editingId,
+    this._editingId,
   }) : _repo = applicationRepository,
-       _editingId = editingId,
        super(const ApplicationFormState());
 
   final ApplicationRepository _repo;
